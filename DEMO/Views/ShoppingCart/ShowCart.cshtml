@@ -1,0 +1,76 @@
+﻿@using DEMO.Models
+@model List<DEMO.Models.CartItem>
+
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        <h2 class="text-center">GIỎ HÀNG</h2>
+        @if (Model != null)
+        {
+            <table id="cart" class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Tên sản phẩm</th>
+                        <th style="width:10%">Giá</th>
+                        <th style="width:8%">Số lượng hiện có</th>
+                        <th style="width:22%" class="text-center">Thành tiền</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        double total = Convert.ToDouble(item.Product.product_price * item.Quantity);
+                        <tr>
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-2 hidden-xs">
+                                        <img src=@Url.Content("~/Assets/Admin/image/" + item.Product.product_image) alt="Product Image" class="img-responsive" width="100" />
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4 class="nomargin">@item.Product.product_name</h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-th="Price">@(item.Product.product_price.ToString("N0") ?? "")đ</td>
+                            <td data-th="Quantity">
+                                @using (Html.BeginForm("UpdateCart", "ShoppingCart",new {ProductID = item.product_id, Quantity = item.Quantity }))
+                                {
+                                    <input type="hidden" value="@item.product_id" name="ProductID" />
+                                    <input type="number" class="form-control text-center" value="@item.Quantity" name="Quantity" min="0" />
+                                    <input type="submit" class="btn btn-info btn-sm" value="Cập nhật" />
+                                }
+                            </td>
+                            <td data-th="Subtotal" class="text-center">@total đ</td>
+                            <td class="actions" data-th="">
+                                <a href="@Url.Action("RemoveCart", "ShoppingCart", new { ProductID = item.product_id })" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="visible-xs">
+                        <td class="text-center"><strong>Tổng: @Model.Sum(i => i.Product.product_price * i.Quantity) đ</strong></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                        </td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td class="hidden-xs text-center"><strong>Tổng tiền: @Model.Sum(i => i.Product.product_price * i.Quantity) đ</strong></td>
+                        <td>
+                            <a href="@Url.Action("Order", "ShoppingCart")" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
+        {
+            <p>Giỏ hàng của bạn đang trống.</p>
+        }
+    </div>
+

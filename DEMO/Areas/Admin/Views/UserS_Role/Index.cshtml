@@ -1,0 +1,81 @@
+﻿@model DEMO.ViewModels.UsersRoleViewModel
+
+@{
+    ViewBag.Title = "Danh sách";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<a href="@Url.Action("CreateRole","Users_Role")" class="btn btn-success mt-3">Thêm vai trò</a>
+<h4 class="mt-2">Danh sách vai trò</h4>
+<table class="table">
+    <tr>
+        <th>ID Vai trò</th>
+        <th>Tên vai trò</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var role in Model.Roles)
+    {
+        <tr>
+            <td>@role.role_id</td>
+            <td>@role.role_name</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("EditRole", "Users_Role", new { id = role.role_id })">Chỉnh sửa</a>
+                <a class="btn btn-danger" href="@Url.Action("DeleteRole", "Users_Role", new { id = role.role_id })">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+<a class="btn btn-success mt-5" href="@Url.Action("CreateUsers", "Users_Role")">Thêm người dùng</a>
+<form class="d-flex flex-row align-items-center flex-wrap my-2" method="get">
+    <label for="search" class="mx-2 my-1">Tìm kiếm</label>
+    <input type="search"
+           class="form-control w-auto"
+           id="search"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="UserName or Phone" />
+    <button type="submit" class="btn btn-primary mx-2"><i class="lni lni-search-alt"></i></button>
+</form>
+<h4 class="my-1">Danh sách người dùng</h4>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Vai trò</th>
+        <th>UserName</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Điện thoại</th>
+        <th>Địa chỉ</th>
+        <th>Thời gian tạo</th>
+        <th>Thời gian thay đổi</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+
+            <td>@user.user_id</td>
+            <td>@user.Role.role_name</td>
+            <td>@user.user_name</td>
+            <td>@user.fullname</td>
+            <td>@user.email</td>
+            <td>@user.phone</td>
+            <td>@user.address</td>
+            <td>@user.create_at</td>
+            <td>@user.update_at</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("EditUsers", "Users_Role", new { id =user.user_id })"><i class="lni lni-shield"></i></a>
+                <a class="btn btn-danger"href="@Url.Action("DeleteUsers", "Users_Role", new { id =user.user_id })"><i class="lni lni-trash-can"></i></a>
+            </td>
+        </tr>
+    }
+</table>

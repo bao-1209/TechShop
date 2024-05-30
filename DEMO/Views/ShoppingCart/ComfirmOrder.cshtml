@@ -1,0 +1,55 @@
+﻿@using DEMO.Models
+@{
+    ViewBag.Title = "ComfirmOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section section--icon-heading">
+    <div class="section__icon unprintable">
+        <svg xmlns="http://www.w3.org/2000/svg" width="72px" height="72px">
+            <g fill="none" stroke="#8EC343" stroke-width="2">
+                <circle cx="36" cy="36" r="35" style="stroke-dasharray:240px, 240px; stroke-dashoffset: 480px;"></circle>
+                <path d="M17.417,37.778l9.93,9.909l25.444-25.393" style="stroke-dasharray:50px, 50px; stroke-dashoffset: 0px;"></path>
+            </g>
+        </svg>
+    </div>
+    <div class="thankyou-message-container">
+        <h2 class="section__title">Cảm ơn bạn đã đặt hàng</h2>
+        @{
+            User users = (User)Session["User"];
+        }
+        <p class="section__text">
+            Một email xác nhận đã được gửi tới @users.email <br>
+            Xin vui lòng kiểm tra email của bạn
+        </p>
+        <div class="section__content section__content--bordered">
+
+            <div class="row">
+
+                <div class="col col--md-two">
+                    <h2>Thông tin mua hàng</h2>
+                    <p>@users.fullname</p>
+
+                    <p>@users.email</p>
+
+
+                </div>
+
+                <div class="col col--md-two">
+                    <h2>Địa chỉ nhận hàng</h2>
+                    <p>@users.address</p>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col--md-two">
+                    <h2>Phương thức vận chuyển</h2>
+                    <p>Giao hàng tận nơi</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

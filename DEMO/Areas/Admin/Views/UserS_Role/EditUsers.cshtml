@@ -1,0 +1,44 @@
+﻿@model DEMO.Models.User
+@{
+    ViewBag.Title = "Phân quyền";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Phân quyền</h2>
+
+<form action="@Url.Action("EditUsers", "Users_Role", new { area = "Admin" })" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="user_id" value="@Model.user_id" />
+    <div class="row mt-5">
+        <div class="col-md-6 mb-2">
+            <label for="role_id">Vai trò</label>
+            <select class="form-control" id="role_id" name="role_id">
+                @foreach (var Role in ViewBag.Role)
+                {
+                    <option value="@Role.role_id" @(Role.role_id == Model.role_id ? "selected" : "")>
+                        @Role.role_name
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+ 
+
+        <div class="col-md-6">
+            <label>Tên người dùng:</label>
+            <span class="fw-bold">@Model.user_name</span>
+        </div>
+        <div class="col-md-6 my-2">
+            <label>Email:</label>
+            <span class="fw-bold">@Model.email</span>
+        </div>
+        <div class="col-md-6">
+            <label>Tên hiển thị:</label>
+            <span class="fw-bold">@Model.fullname</span>
+        </div>
+
+ 
+
+    <button type="submit" class="btn btn-success my-2">Lưu</button>
+    <a href="@Url.Action("Index", "Users_Role", new { area = "Admin" })" class="btn btn-dark">Hủy</a>
+</form>

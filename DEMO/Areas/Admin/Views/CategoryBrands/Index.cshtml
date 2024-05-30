@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<a href="@Url.Action("CreateCategory", "CategoryBrands")" class="btn btn-success mt-3">Thêm danh mục</a>
+<h1>Danh sách danh mục</h1>
+<table class="table">
+    <tr>
+        <th>ID danh mục</th>
+        <th>Tên danh mục</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model.ProductCategories)
+    {
+        <tr>
+            <td>@item.category_id</td>
+            <td>@item.category_name</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("EditCategory", "CategoryBrands", new { id = item.category_id })">Chỉnh sửa</a>
+                <a class="btn btn-danger" href="@Url.Action("DeleteCategory", "CategoryBrands", new { id = item.category_id })">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+<a href="@Url.Action("CreateBrands", "CategoryBrands")" class="btn btn-success mt-3">Thêm thương hiệu</a>
+<h1>Danh sách thương hiệu</h1>
+<table class="table">
+    <tr>
+        <th>ID thương hiệu</th>
+        <th>Tên thương hiệu</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model.Brands)
+    {
+        <tr>
+            <td>@item.brand_id</td>
+            <td>@item.brand_name</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("EditBrands", "CategoryBrands", new { id = item.brand_id })">Chỉnh sửa</a>
+                <a class="btn btn-danger" href="@Url.Action("DeleteBrands", "CategoryBrands", new { id = item.brand_id })">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+<a href="@Url.Action("CreateCategoryBrand", "CategoryBrands")" class="btn btn-success mt-3">Thêm phân loại</a>
+<h1>Danh sách phân loại</h1>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Tên danh mục</th>
+        <th>Tên thương hiệu</th>
+        <th>Hàng động</th>
+    </tr>
+
+    @foreach (var item in Model.Category_Brands)
+    {
+        <tr>
+            <td>@item.categorybrand_id</td>
+            <td>@item.ProductCategory.category_name</td>
+            <td>@item.Brand.brand_name</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("EditCategoryBrand", "CategoryBrands", new { id = item.categorybrand_id })">Chỉnh sửa</a>
+                <a class="btn btn-danger" href="@Url.Action("EditCategoryBrand", "CategoryBrands", new { id = item.categorybrand_id })">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
+
+

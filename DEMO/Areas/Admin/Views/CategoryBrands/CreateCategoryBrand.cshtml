@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "CreateCategoryBrand";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Thêm phân loại</h2>
+
+<form action="@Url.Action("CreateCategoryBrand", "CategoryBrands", new {area = "Admin"})" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-6 mb-2">
+        <label for="category_id">Danh mục</label>
+        <select class="form-control"
+                id="category_id"
+                name="category_id">
+            <option value="">Vui lòng chọn..</option>
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category.category_id">
+                    @category.category_name
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-6 mb-2">
+        <label for="brand_id">Thương hiệu</label>
+        <select class="form-control"
+                id="brand_id"
+                name="brand_id">
+            <option value="">Vui lòng chọn..</option>
+            @foreach (var brand in ViewBag.Brands)
+            {
+                <option value="@brand.brand_id">
+                    @brand.brand_name
+                </option>
+            }
+        </select>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success my-2">Tạo</button>
+    <a href="@Url.Action("Index", "CategoryBrands", new {area = "Admin"})" class="btn btn-dark">Hủy</a>
+</form>
+
+

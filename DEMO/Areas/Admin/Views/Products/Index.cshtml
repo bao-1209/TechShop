@@ -1,0 +1,64 @@
+﻿@model List<DEMO.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Danh sách sản phẩm</h2>
+<a class="btn btn-success" href="@Url.Action("Create", "Products")">Thêm sản phẩm</a>
+<form class="d-flex flex-row align-items-center flex-wrap" method="get">
+    <label for="search" class="mx-2 my-1">Tìm kiếm</label>
+    <input type="search"
+           class="form-control w-auto"
+           id="search"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="Tên sản phẩm" />
+    <button type="submit" class="btn btn-primary mx-2"><i class="lni lni-search-alt"></i></button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            <a href="@Url.Action("Index", new { SortColumn = "product_id", IconClass = ViewBag.IconClass })">ID</a>
+            @if (ViewBag.SortColumn == "product_id")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th>Danh mục</th>
+        <th>Thương hiệu</th>
+        <th>
+            <a href="@Url.Action("Index", new { SortColumn = "product_name", IconClass = ViewBag.IconClass })">Tên sản phẩm</a>
+            @if (ViewBag.SortColumn == "product_name")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th>Giá</th>
+        <th>Hình ảnh</th>
+        <th>Mô tả</th>
+        <th>Tồn kho</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.product_id</td>
+            <td>@item.ProductCategory.category_name</td>
+            <td>@item.Brand.brand_name</td>
+            <td>@item.product_name</td>
+            <td>@item.product_price.ToString("N0")</td>
+            <td>
+                <img src="@Url.Content("~/Assets/Admin/image/" + item.product_image)" alt="Hình ảnh sản phẩm" style="width: 50px; height: 50px;" />
+            </td>
+            <td>@item.product_description</td>
+            <td>@item.product_quantity</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("Edit", "Products", new { id = item.product_id })">Sửa</a>
+                <a class="btn btn-danger" href="@Url.Action("Delete", "Products", new { id = item.product_id })">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>

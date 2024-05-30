@@ -1,0 +1,26 @@
+﻿@model DEMO.Models.Order
+@{
+    ViewBag.Title = "Cập nhật trạng thái đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Cập nhật trạng thái đơn hàng</h2>
+
+<form action="@Url.Action("UpdateStatus", "Orders", new {area = "Admin"})" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="order_id" value="@Model.order_id" />
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label for="order_status">Trạng thái</label>
+            <select class="form-control" id="order_status" name="order_status">
+                <option value="chưa xác nhận" @(Model.order_status == "chưa xác nhận" ? "selected" : "")>Chưa xác nhận</option>
+                <option value="đã xác nhận" @(Model.order_status == "đã xác nhận" ? "selected" : "")>Đã xác nhận</option>
+                <option value="đã giao hàng" @(Model.order_status == "đã giao hàng" ? "selected" : "")>Đã giao hàng</option>
+                <option value="đã hủy" @(Model.order_status == "đã hủy" ? "selected" : "")>Đã hủy</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success my-2">Lưu</button>
+    <a href="@Url.Action("Index", "Orders", new {area = "Admin"})" class="btn btn-dark">Hủy</a>
+</form>

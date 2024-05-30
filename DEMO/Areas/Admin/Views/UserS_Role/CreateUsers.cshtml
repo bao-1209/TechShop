@@ -1,0 +1,39 @@
+﻿@model DEMO.Models.User
+
+@{
+    ViewBag.Title = "Thêm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Thêm người dùng</h2>
+
+<form action="@Url.Action("CreateUsers", "Users_Role", new { area = "Admin" })" method="post">
+    @Html.AntiForgeryToken()
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label for="user_name">Tên người dùng</label>
+            @Html.TextBoxFor(model => model.user_name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.user_name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6">
+            <label for="password">Mật khẩu</label>
+            @Html.PasswordFor(model => model.password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6">
+            <label for="fullname">Tên hiển thị</label>
+            @Html.TextBoxFor(model => model.fullname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6">
+            <label for="email">Email</label>
+            @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success my-2">Tạo</button>
+    <a href="@Url.Action("Index", "Users_Role", new { area = "Admin" })" class="btn btn-dark">Hủy</a>
+</form>

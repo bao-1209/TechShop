@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 class="mt-4 mb-4">BÁO CÁO DOANH THU</h2>
+
+<div class="container">
+    <form method="post" action="@Url.Action("Index", "Home", new { area = "Admin" })">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="startDate" class="form-label">Từ ngày</label>
+                <input type="date" name="startDate" id="startDate" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label for="endDate" class="form-label">Đến ngày</label>
+                <input type="date" name="endDate" id="endDate" class="form-control" required>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Lọc</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Tổng doanh thu</h3>
+                    @if (ViewBag.TotalRevenue != null)
+                    {
+                        <p class="card-text display-4 font-weight-bold text-primary">@String.Format("{0:#,##0} VND", ViewBag.TotalRevenue)</p>
+                    }
+                    else
+                    {
+                        <p class="card-text display-4 font-weight-bold text-primary">Không có dữ liệu tổng doanh thu</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

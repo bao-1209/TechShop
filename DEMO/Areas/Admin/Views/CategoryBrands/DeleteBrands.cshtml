@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Xóa thương hiệu</h2>
+
+<form id="deleteForm" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="brand_id" value="@Model.brand_id" />
+</form>
+
+<form action="@Url.Action("DeleteBrandsConfirmed", "CategoryBrands", new { area = "Admin" })" method="post">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label for="brand_name">Tên thuơng hiệu</label>
+            <input type="text"
+                   class="form-control"
+                   id="brand_name"
+                   name="brand_name"
+                   value="@Model.brand_name" disabled />
+        </div>
+    </div>
+    <button type="button" onclick="confirmDelete()" class="btn btn-success">Xóa</button>
+    <a href="@Url.Action("Index", "CategoryBrands", new { area = "Admin" })" class="btn btn-dark">Hủy</a>
+</form>
+
+<script>
+    function confirmDelete() {
+        if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+            var brandID = document.querySelector('input[name="brand_id"]').value;
+            var form = document.getElementById("deleteForm");
+            form.action = "@Url.Action("DeleteBrandsConfirmed", "CategoryBrands", new { area = "Admin" })" + "/" + brandID;
+            form.submit();
+        }
+    }
+</script>
+

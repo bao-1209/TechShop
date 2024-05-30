@@ -1,0 +1,325 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/CSS/Custom.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="background-color: #f0f0f0;">
+    <section class="header">
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-md-3 py-2 text-danger">
+                    TECH-SHOP
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "input-group mb-3" }))
+                        {
+                            @Html.TextBox("searchString", null, new { @class = "form-control border-secondary", @placeholder = "Tìm kiếm", @aria_label = "Recipient's username", @aria_describedby = "basic-addon2" })
+                            <span class="input-group-append">
+                                <button class="input-group-text btn btn-danger" type="submit" id="basic-addon2">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </span>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="fs-3">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    Tư vấn hỗ trợ<br>
+                                    <strong class="text-danger">0855558860</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="fs-3">
+                                                <i class="fa-regular fa-user"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 d-flex align-items-center nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Tài khoản
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                @if (Session["User"] != null)
+                                                {
+                                                    <strong class="dropdown-item" style=" color:red;">@Session["UserName"]</strong>
+                                                    <a class="dropdown-item" href="@Url.Action("Logout", "Login")">Đăng xuất</a>
+                                                }                                            
+                                                else
+                                                {
+                                                <strong class="dropdown-item">@Html.ActionLink("Đăng ký", "Register", "Login", null, new { @class = " mylink " })</strong>
+                                                <strong class="dropdown-item">@Html.ActionLink("Đăng Nhập", "Login", "Login", null, new { @class = " mylink " })</strong>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 row align-items-start">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" class="position-relative text-dark">
+                                <span class="fs-2"><i class="fa-regular fa-heart"></i></span>
+                                
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="@Url.Action("ShowCart", "ShoppingCart")" class="position-relative text-dark">
+                                <span class="fs-2"><i class="fa-solid fa-bag-shopping"></i></span>
+                                
+
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="Menubar bg-danger">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 py-3 " style="border-right:1px solid white;">
+                    <a class="text-light text-decoration-none">@Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = "form" })</a>
+                </div>
+                <div class="col-md-9">
+                    <nav class="navbar navbar-expand-lg bg-danger">
+                        <div class="container-fluid">
+                            <a class="navbar-brand d-none" href="#">Navbar</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active text-light" aria-current="page" href="#"></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <strong class="nav-link text-light" href="/contract/contract">@Html.ActionLink("Liên hệ", "Contract", "Contract", null, new { @class = "form text-decoration:none" })</strong>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Sản phẩm
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background:#dfdbdbd5">
+                                            <header><b>LAPTOP</b></header>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("MSI", "ByBrands", "Product", new { BrandID = 1 }, null)</li>
+                                            </ul>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("ACER", "ByBrands", "Product", new { BrandID = 3 }, null)</li>
+                                            </ul>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("ASUS", "ByBrands", "Product", new { BrandID = 7 }, null)</li>
+                                            </ul>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("HP", "ByBrands", "Product", new { BrandID = 8 }, null)</li>
+                                            </ul>
+                                            <header><b>ĐIỆN THOẠI</b></header>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("IPHONE", "ByBrands", "Product", new { BrandID = 2 }, null)</li>
+                                            </ul>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("SAMSUNG", "ByBrands", "Product", new { BrandID = 5 }, null)</li>
+                                            </ul>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("OPPO", "ByBrands", "Product", new { BrandID = 9 }, null)</li>
+                                            </ul>
+                                            <ul>
+                                                <li style="list-style:none">@Html.ActionLink("XIAOMI", "ByBrands", "Product", new { BrandID = 4 }, null)</li>
+                                            </ul>
+                                        </div>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" href="/Product/ByCategory?categoryID=2">Điện thoại</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" href="/Product/ByCategory?categoryID=1">Laptop</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    @RenderBody();
+    <section class="card-footer bg-dark text-white py-3">
+        <div class="first-footer d-flex">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <h4 class="title-menu-footer">
+                            <span>
+                                Văn phòng giao dịch
+                            </span>
+                        </h4>
+                        <ul class="list-menu">
+                            <li class="li_menu"><a href="#" title="Cơ sở chính thức">Cơ sở chính thức</a></li>
+                            <li class="li_menu"><a href="/he-thong-cua-hang" title="Địa điểm bán hàng">Địa điểm bán hàng</a></li>
+                            <li class="li_menu"><a href="#" title="Tuyển cộng tác viên">Tuyển cộng tác viên</a></li>
+                            <li class="li_menu"><a href="/gioi-thieu" title="Tuyển dụng">Tuyển dụng</a></li>
+                            <li class="li_menu"><a href="/gioi-thieu" title="Fanpage trực tuyến">Fanpage trực tuyến</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <h4 class="title-menu-footer">
+                            <span>
+                                Về chúng tôi
+                            </span>
+                        </h4>
+                        <ul class="list-menu">
+                            <li class="li_menu"><a href="/about/about" title="Đôi nét về công ty">Đôi nét về công ty</a></li>
+                            <li class="li_menu"><a href="/gioi-thieu" title="Lịch sử hình thành">Lịch sử hình thành</a></li>
+                            <li class="li_menu"><a href="/gioi-thieu" title="Giải thưởng cao quý">Giải thưởng cao quý</a></li>
+                            <li class="li_menu"><a href="/gioi-thieu" title="Cơ hội cho ai">Cơ hội cho ai</a></li>
+                            <li class="li_menu"><a href="/gioi-thieu" title="Thương hiệu số 1">Thương hiệu số 1</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <h4 class="title-menu-footer">
+                            <span>
+                                Chính sách bán hàng
+                            </span>
+                        </h4>
+                        <ul class="list-menu">
+                            <li class="li_menu"><a href="/about/policy" title="Chính sách chung">Chính sách chung</a></li>
+                            <li class="li_menu"><a href="/about/policy" title="Chính sách đổi trả">Chính sách đổi trả</a></li>
+                            <li class="li_menu"><a href="/about/policy" title="Chính sách bảo hành">Chính sách bảo hành</a></li>
+                            <li class="li_menu"><a href="/about/policy" title="Chính sách thành viên">Chính sách thành viên</a></li>
+                            <li class="li_menu"><a href="/about/policy" title="Chính sách điểm thưởng">Chính sách điểm thưởng</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <h4 class="title-menu-footer">
+                            <span>
+                                Theo dõi chúng tôi
+                            </span>
+                        </h4>
+                        <ul class="list-menu">
+                            <li class="li_menu"><a href="https://www.facebook.com/" title="Theo dõi trên Fanpage">Theo dõi trên Fanpage</a></li>
+                            <li class="li_menu"><a href="https://www.instagram.com/" title="Theo dõi trên Instagram">Theo dõi trên Instagram</a></li>
+                            <li class="li_menu"><a href="https://twitter.com/home?lang=vi" title="Theo dõi trên X">Theo dõi trên X</a></li>
+                            <li class="li_menu"><a href="/" title="Theo dõi trên Tiktok">Theo dõi trên Tiktok</a></li>
+                            <li class="li_menu"><a href="https://www.youtube.com/" title="Theo dõi trên Youtube">Theo dõi trên Youtube</a></li>
+                        </ul>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="child-footer d-flex">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <h4 class="title-menu">
+                            <span>
+                                Thế giới mobile cho mọi người
+                            </span>
+                        </h4>
+                        <ul>
+                            <li>Copyright 2023 Công ty cổ phần thương mại Tech Mobicon</li>
+                            <li>Chứng nhận ĐKKD số: 038828xxxx do sở KH &amp; ĐT TP.Cần Thơ cấp</li>
+                            <li>Địa chỉ: Xuân Khánh, Cần Thơ</li>
+                            <li>
+                                Điện thoại: <a style="text-decoration:none;color:whitesmoke" class="fone" href="tel:19006750">84+ 5555 88 60</a>
+                                - Email: <a style="text-decoration:none;color:whitesmoke" href="#">TechSp@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <h4 class="title-menu">
+                        <span>
+                            Nhận tin khuyến mãi
+                        </span>
+                    </h4>
+                    <div class="mail_footer subscribe formchip-email" id="formchimp">
+                        <form id="mc-form" class="newsletter-form" data-toggle="validator" action="https://gmail.us2.list-manage.com/subscribe/post-json?u=ef7f65e3be67e30ff1c4bd591&amp;id=a7430e9bc5">
+                            <div class="input-group">
+                                <div class="groupiput">
+                                    <input aria-label="Địa chỉ Email" type="email" class="form-control" placeholder="Nhập email của bạn" name="EMAIL" required="" autocomplete="off">
+                                </div>
+                                <span class="input-group-append subscribe">
+                                    <button class="btn btn-default text-bg-primary" type="submit" aria-label="Đăng ký" name="subscribe">Đăng ký</button>
+                                </span>
+                            </div>
+                        </form>
+                        <div class="mailchimp-alerts">
+                            <div class="mailchimp-submitting"></div>
+                            <div class="mailchimp-success"></div>
+                            <div class="mailchimp-error"></div>
+                        </div>
+                    </div>
+                    <div class="social-footer">
+                        <a href="https://www.facebook.com/" title="Facebook">
+                            <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_1.jpg?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_1.jpg?1708054180263" alt="Facebook">
+                        </a>
+                        <span style="margin-right: 10px;"></span>
+                        <a href="https://www.tiktok.com/foryou" title="Tiktok">
+                            <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_2.jpg?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_2.jpg?1708054180263" alt="Tiktok">
+                        </a>
+                        <span style="margin-right: 10px;"></span>
+                        <a href="https://shopee.vn/?utm_source=coccoc.com&utm_medium=cpc&utm_campaign=VN_COM_SEM_MT1ONLY_NB_GE%7CCOMPETITOR&utm_term=sendo%20%2Dtiki&utm_content=39717455&md=_05be50vdanX7QmsEHAREOlmIPrbnMNlMehyz-uSq5ryhHbx*zZG6Fjv0Hmk966tqxfWmsvPZ-PjiTHMWKQDs9Jm7fszp3oiBBG*dpK6wf0W*aQpf2h8jWO77muQhVa8dVNf0." title="Shopee">
+                            <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_3.jpg?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_3.jpg?1708054180263" alt="Shopee">
+                        </a>
+                        <span style="margin-right: 10px;"></span>
+                        <a href="https://www.lazada.vn/" title="Lazada">
+                            <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_4.jpg?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/social_4.jpg?1708054180263" alt="Lazada">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright d-flex">
+            <div class="container">
+                <div class="inner">
+                    <div class="row-table">
+                        <div id="copyright" class="col-lg-6 col-md-6 col-12">
+                            <div class="wsp">
+                                Bản quyền thuộc về <a style="text-decoration:none;color:gray" href="/Home/Index">TECH CORP</a>
+                                <span class="opacity1">
+                                    Cung cấp bởi
+                                    <a href="/Home/Index" rel="noopener" title="TECH" target="_blank" style="text-decoration:none;color:whitesmoke">TECH-SHOP</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

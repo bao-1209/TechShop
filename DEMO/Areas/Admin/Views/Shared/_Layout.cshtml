@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/Assets/Admin/css/style.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.css"/>
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="#">TechShop</a>
+                </div>
+            </div>
+
+            <ul class="sidebar-nav">
+
+                <li class="sidebar-item">
+                    <a href="@Url.Action("Index", "Home", new { area = "Admin" })" class="sidebar-link">
+                        <i class="lni lni-dashboard"></i>
+                        <span>Báo cáo phân tích</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="@Url.Action("Index", "Users_Role", new { area = "Admin" })" class="sidebar-link">
+                        <i class="lni lni-users"></i>
+                        <span>Người dùng - Vai trò</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                       data-bs-target="#product" aria-expanded="false" aria-controls="product">
+                        <i class="lni lni-laptop-phone"></i>
+                        <span>Quản lý sản phẩm</span>
+                    </a>
+                    <ul id="product" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+
+                        <li class="sidebar-item">
+                            <a href="@Url.Action("Index", "Products", new {are = "Admin"})" class="sidebar-link">Sản phẩm</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="@Url.Action("Index", "CategoryBrands", new {are = "Admin"})" class="sidebar-link">Danh mục - Thương hiệu</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="@Url.Action("Index", "Orders", new { area = "Admin" })" class="sidebar-link">
+                        <i class="lni lni-cart"></i>
+                        <span>Đơn hàng</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-link">
+                    <i class="lni lni-exit"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+        <div class="main p-3">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/scripts/bootstrap.js"></script>
+    <script src="~/Assets/Admin/js/JavaScript.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

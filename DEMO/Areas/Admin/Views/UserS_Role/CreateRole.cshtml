@@ -1,0 +1,23 @@
+﻿@model DEMO.Models.Role
+
+@{
+    ViewBag.Title = "Thêm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Thêm vai trò</h2>
+
+<form action="@Url.Action("CreateRole", "Users_Role", new {area = "Admin"})" method="post">
+    @Html.AntiForgeryToken()
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label for="role_name">Tên vai trò</label>
+            <input type="text"
+                   class="form-control"
+                   id="role_name"
+                   name="role_name" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success my-2">Tạo</button>
+    <a href="@Url.Action("Index", "Users_Role", new {area = "Admin"})" class="btn btn-dark">Hủy</a>
+</form>

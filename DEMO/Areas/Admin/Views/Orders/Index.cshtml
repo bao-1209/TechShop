@@ -1,0 +1,46 @@
+﻿@model List<DEMO.Models.Order>
+@{
+    ViewBag.Title = "Danh sách đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Danh sách đơn hàng</h2>
+
+<form class="d-flex flex-row align-items-center flex-wrap" method="get">
+    <label for="search" class="mx-2 my-1">Tìm kiếm</label>
+    <input type="search"
+           class="form-control w-auto"
+           id="search"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="Mã đơn hàng" />
+    <button type="submit" class="btn btn-primary mx-2"><i class="lni lni-search-alt"></i></button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Tên khách hàng</th>
+        <th>Giá trị đơn hàng</th>
+        <th>Ngày đặt hàng</th>
+        <th>Trạng thái đơn hàng</th>
+        <th>Địa chỉ</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.order_id</td>
+            <td>@item.User.fullname</td>
+            <td>@item.total_price.ToString("N0")</td>
+            <td>@item.order_date</td>
+            <td>@item.order_status</td>
+            <td>@item.shipping_address</td>
+            <td>
+                <a class="btn btn-success" href="@Url.Action("UpdateStatus", "Orders", new {id = item.order_id})">Cập nhật</a>
+                <a class="btn btn-info" href="@Url.Action("Detail", "Orders", new {id = item.order_id})">Chi tiết</a>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,37 @@
+﻿<script>
+    function confirmDelete() {
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+            // Nhấn OK trong hộp thoại xác nhận, gửi yêu cầu xóa
+            var productId = document.querySelector('input[name="product_id"]').value;
+            var form = document.getElementById("deleteForm");
+            form.action = form.action + "/" + productId; // Thêm product_id vào action URL
+            form.submit();
+        }
+    }
+</script>
+
+
+@model DEMO.Models.Product
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Xóa sản phẩm</h2>
+
+<form id="deleteForm" action="@Url.Action("DeleteConfirmed", "Products", new { area = "Admin" })" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="product_id" value="@Model.product_id" />
+    <table class="table">
+        <tr>
+            <th>Tên sản phẩm</th>
+            <td>@Model.product_name</td>
+        </tr>
+        <tr>
+            <th>Giá</th>
+            <td>@Model.product_price</td>
+        </tr>
+    </table>
+    <button type="button" onclick="confirmDelete()" class="btn btn-success">Xóa</button>
+    <a href="@Url.Action("Index", "Products", new { area = "Admin" })" class="btn btn-dark">Hủy</a>
+</form>

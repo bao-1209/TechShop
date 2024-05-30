@@ -1,0 +1,41 @@
+﻿
+
+@model DEMO.Models.User
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-5">Xóa người dùng</h2>
+
+<form id="deleteForm" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="user_id" value="@Model.user_id" />
+</form>
+
+<form action="@Url.Action("DeleteUsersConfirmed", "Users_Role", new { area = "Admin" })" method="post">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label for="user_name">Tên người dùng</label>
+            <input type="text"
+                   class="form-control"
+                   id="user_name"
+                   name="user_name"
+                   value="@Model.user_name" disabled />
+        </div>
+    </div>
+    <button type="button" onclick="confirmDelete()" class="btn btn-success">Xóa</button>
+    <a href="@Url.Action("Index", "Users_Role", new { area = "Admin" })" class="btn btn-dark">Hủy</a>
+</form>
+
+<script>
+    function confirmDelete() {
+        if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
+            var userId = document.querySelector('input[name="user_id"]').value;
+            var form = document.getElementById("deleteForm");
+            form.action = "@Url.Action("DeleteUsersConfirmed", "Users_Role", new { area = "Admin" })" + "/" + userId;
+            form.submit();
+        }
+    }
+</script>

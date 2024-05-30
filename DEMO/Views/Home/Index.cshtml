@@ -1,0 +1,157 @@
+﻿@model List<DEMO.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row py-3">
+        <div class="col-md-9">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/Assets/Images/slider_1.webp" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Assets/Images/slider_2.webp" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3 py-3">
+            <a class="banner_slide_1" href="@Url.Action("Details", "Product", new { id = 4 })" title="Banner">
+                <img width="500" height="220" src="//bizweb.dktcdn.net/100/497/960/themes/923878/assets/banner_right_1.jpg?1714615981282" alt="Banner">
+            </a>
+            <a class="banner_slide_1" href="" title="Banner">
+                <img width="500" height="220" src="//bizweb.dktcdn.net/100/497/960/themes/923878/assets/banner_right_2.jpg?1714615981282" alt="Banner">
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1 style="color:darkred">SẢN PHẨM MỚI</h1>
+        <hr>
+        <div class="row">
+            <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+                <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col hp">
+                            <div class="card h-100 shadow-sm">
+                                <a style="text-decoration:none" target="_blank" href="@Url.Action("Details", "Product", new { id = item.product_id })">
+                                    <img src=@Url.Content("~/Assets/Admin/image/" + item.product_image) class="card-img-top" alt="product.title" />
+                                </a>
+                                <div class="label-top shadow-sm">
+                                    <a class="text-white" href="#">@(item.ProductCategory?.category_name ?? "Default Category")</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="clearfix mb-3">
+                                        <span class="float-start badge rounded-pill bg-success">@(item.product_price.ToString("N0") ?? "")đ</span>
+
+                                        <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+                                    </div>
+                                    <h5 class="card-title">
+                                        <p>@item.product_name</p>
+                                    </h5>
+
+                                    <div class="d-grid gap-2 my-4">
+                                        <a href="@Url.Action("AddCartItems", "ShoppingCart", new { ProductID = item.product_id, Quantity = 1 })" class="btn btn-warning bold-btn">Add to Cart</a>
+                                    </div>
+                                    <div class="clearfix mb-1">
+
+                                        <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+                                        <span class="float-end">
+
+                                            <i class="far fa-heart" style="cursor: pointer"></i>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section_service container">
+    <div class="white">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="itemsv">
+                    <div class="image">
+                        <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv1.png?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv1.png?1708054180263" alt="Hàng chính hãng">
+                    </div>
+                    <div class="contentsv">
+                        <h4>
+                            Hàng chính hãng
+                        </h4>
+                        <p>
+                            Đa dạng và chuyên sâu
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="itemsv">
+                    <div class="image">
+                        <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv2.png?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv2.png?1708054180263" alt="Đổi trả trong 7 ngày">
+                    </div>
+                    <div class="contentsv">
+                        <h4>
+                            Đổi trả trong 7 ngày
+                        </h4>
+                        <p>
+                            Kể từ ngày mua hàng
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="itemsv">
+                    <div class="image">
+                        <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv3.png?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv3.png?1708054180263" alt="Cam kết 100%">
+                    </div>
+                    <div class="contentsv">
+                        <h4>
+                            Cam kết 100%
+                        </h4>
+                        <p>
+                            Chất lượng sản phẩm
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="itemsv">
+                    <div class="image">
+                        <img class="lazyload loaded" width="32" height="32" src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv4.png?1708054180263" data-src="//bizweb.dktcdn.net/100/507/051/themes/936909/assets/ico_sv4.png?1708054180263" alt="Giao hàng 2H">
+                    </div>
+                    <div class="contentsv">
+                        <h4>
+                            Giao hàng 2H
+                        </h4>
+                        <p>
+                            Theo từng sản phẩm
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
